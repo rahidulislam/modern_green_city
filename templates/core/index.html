@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block main_content %}
+  <!-- Hero Section Begin -->
+  <section class="hero-section">
+    <div class="container">
+        <div class="hs-slider owl-carousel">
+            {% for slider in hero_sliders %}
+            <div class="hs-item set-bg" data-setbg="{{ slider.image_url }}">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="hc-inner-text">
+                            <div class="hc-text">
+                                <h4>{{ slider.title }}</h4>
+                                <p><span class="icon_pin_alt"></span> {{ slider.location }}</p>
+                                
+                                <h5>৳ {{ slider.installment|intcomma }}<span>/month</span></h5>
+                            </div>
+                            <div class="hc-widget">
+                                <ul>
+                                    <li><i class="fa fa-object-group"></i> {{ slider.flat_area|intcomma }}</li>
+                                    <li><i class="fa fa-bathtub"></i> {{ slider.bathrooms}}</li>
+                                    <li><i class="fa fa-bed"></i> {{ slider.bedrooms }}</li>
+                                    <li><i class="fa fa-automobile"></i> {{ slider.car_parking }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Hero Section End -->
+
+<!-- Search Section Begin -->
+<section class="search-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h4>Where would you rather live?</h4>
+                </div>
+            </div>
+            
+        </div>
+        
+        <div class="search-form-content">
+            <form action="" class="filter-form" method="POST">
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+        </div>
+        
+    </div>
+</section>
+<!-- Search Section End -->
+
+<!-- Property Section Begin -->
+<section class="property-section latest-property-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="section-title">
+                    <h4>Latest PROPERTY</h4>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="property-controls">
+                    <ul>
+                        <li data-filter="all">All</li>
+                        {% for category in land_types %}
+                        <li data-filter=".{{ category.slug }}">{{ category.name }}</li>
+                        {% endfor %}
+                        <!-- <li data-filter=".apart">Apartment</li>
+                        <li data-filter=".house">House</li>
+                        <li data-filter=".office">Office</li>
+                        <li data-filter=".hotel">Hotel</li>
+                        <li data-filter=".restaurent">Restaurent</li> -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row property-filter">
+            {% for land in lands %}
+            <div class="col-lg-4 col-md-6 mix all {{ land.land_type.slug }}">
+                <div class="property-item">
+                    <div class="pi-pic set-bg" data-setbg="{{ land.image_url }}">
+                    </div>
+                    <div class="pi-text">
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <div class="pt-price">৳ {{ land.installment|intcomma }}<span>/month</span></div>
+                        <h5><a href="#">{{ land.title }}</a></h5>
+                        <p><span class="icon_pin_alt"></span> {{ land.location }}</p>
+                        <ul>
+                            <li><i class="fa fa-object-group"></i> {{ land.flat_area|intcomma }}</li>
+                            <li><i class="fa fa-bathtub"></i> {{ land.bathrooms}}</li>
+                            <li><i class="fa fa-bed"></i> {{ land.bedrooms }}</li>
+                            <li><i class="fa fa-automobile"></i> {{land.car_parking }}</li>
+                        </ul>
+                        <div class="pi-agent">
+                            <div class="pa-item">
+                                <div class="pa-info">
+                                    
+                                    <h6>Contact</h6>
+                                </div>
+                                <div class="pa-text">
+                                    {{ land.contact }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Property Section End -->
+
+<!-- Chooseus Section Begin -->
+<section class="chooseus-section spad set-bg" data-setbg="{% static 'img/chooseus/chooseus-bg.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="chooseus-text">
+                    <div class="section-title">
+                        <h4>Why choose us</h4>
+                    </div>
+                    <p>Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s, when an unknown
+                        printer took a galley of type and scrambled it to make a type specimen book.</p>
+                </div>
+                <div class="chooseus-features">
+                    <div class="cf-item">
+                        <div class="cf-pic">
+                            <img src="{% static 'img/chooseus/chooseus-icon-1.png' %}" alt="">
+                        </div>
+                        <div class="cf-text">
+                            <h5>Find your future home</h5>
+                            <p>We help you find a new home by offering a smart real estate.</p>
+                        </div>
+                    </div>
+                    <div class="cf-item">
+                        <div class="cf-pic">
+                            <img src="{% static 'img/chooseus/chooseus-icon-2.png' %}" alt="">
+                        </div>
+                        <div class="cf-text">
+                            <h5>Buy or rent homes</h5>
+                            <p>Millions of houses and apartments in your favourite cities</p>
+                        </div>
+                    </div>
+                    <div class="cf-item">
+                        <div class="cf-pic">
+                            <img src="{% static 'img/chooseus/chooseus-icon-3.png' %}" alt="">
+                        </div>
+                        <div class="cf-text">
+                            <h5>Experienced agents</h5>
+                            <p>Find an agent who knows your market best</p>
+                        </div>
+                    </div>
+                    <div class="cf-item">
+                        <div class="cf-pic">
+                            <img src="{% static 'img/chooseus/chooseus-icon-4.png' %}" alt="">
+                        </div>
+                        <div class="cf-text">
+                            <h5>List your own property</h5>
+                            <p>Sign up now and sell or rent your own properties</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Chooseus Section End -->
+
+
+
+<!-- Team Section Begin -->
+<section class="team-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <div class="section-title">
+                    <h4>Our Team</h4>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="team-btn">
+                    <a href="#"><i class="fa fa-user"></i> ALL counselor</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            {% for member in our_teams %}
+            <div class="col-md-4">
+                <div class="ts-item">
+                    <div class="ts-text">
+                        <img src="{{ member.image_url }}" alt="">
+                        <h5>{{ member.name }}</h5>
+                        <span>{{ member.designation}}</span>
+                        <p>{{ member.description }}</p>
+                        <div class="ts-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-envelope-o"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Team Section End -->
+
+<!-- Categories Section Begin -->
+<section class="categories-section">
+    <div class="cs-item-list">
+        {% for land in land_types %}
+        <div class="cs-item set-bg" data-setbg="{{ land.image_url }}">
+            <div class="cs-text">
+                <h5>{{ land.name }}</h5>
+                <span>{{ land.land_category.count }} property</span>
+            </div>
+        </div>
+        {% endfor %}
+        
+    </div>
+</section>
+<!-- Categories Section End -->
+
+<!-- Testimonial Section Begin -->
+<section class="testimonial-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h4>What our client says?</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row testimonial-slider owl-carousel">
+            {% for testimonial in testimonials %}
+            <div class="col-lg-6">
+                <div class="testimonial-item">
+                    <div class="ti-text">
+                        <p>{{ testimonial.client_testimonial }}</p>
+                    </div>
+                    <div class="ti-author">
+                        <div class="ta-pic">
+                            <img src="{{ testimonial.image_url }}" alt="">
+                        </div>
+                        <div class="ta-text">
+                            <h5>{{ testimonial.client_name }}</h5>
+                            <span>{{ testimonial.client_designation }}</span>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+ 
+        </div>
+    </div>
+</section>
+<!-- Testimonial Section End -->
+
+<!-- Logo Carousel Begin -->
+<div class="logo-carousel">
+    <div class="container">
+        <div class="lc-slider owl-carousel">
+            <a href="#" class="lc-item">
+                <div class="lc-item-inner">
+                    <img src="img/logo-carousel/lc-1.png" alt="">
+                </div>
+            </a>
+            <a href="#" class="lc-item">
+                <div class="lc-item-inner">
+                    <img src="img/logo-carousel/lc-2.png" alt="">
+                </div>
+            </a>
+            <a href="#" class="lc-item">
+                <div class="lc-item-inner">
+                    <img src="img/logo-carousel/lc-3.png" alt="">
+                </div>
+            </a>
+            <a href="#" class="lc-item">
+                <div class="lc-item-inner">
+                    <img src="img/logo-carousel/lc-4.png" alt="">
+                </div>
+            </a>
+            <a href="#" class="lc-item">
+                <div class="lc-item-inner">
+                    <img src="img/logo-carousel/lc-5.png" alt="">
+                </div>
+            </a>
+            <a href="#" class="lc-item">
+                <div class="lc-item-inner">
+                    <img src="img/logo-carousel/lc-6.png" alt="">
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<!-- Logo Carousel End -->
+
+<!-- Contact Section Begin -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="contact-info">
+                    <div class="ci-item">
+                        <div class="ci-icon">
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                        <div class="ci-text">
+                            <h5>Address</h5>
+                            <p>{{ setting.address }}</p>
+                        </div>
+                    </div>
+                    <div class="ci-item">
+                        <div class="ci-icon">
+                            <i class="fa fa-mobile"></i>
+                        </div>
+                        <div class="ci-text">
+                            <h5>Phone</h5>
+                            <ul>
+                                <li>{{ setting.mobile }}</li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ci-item">
+                        <div class="ci-icon">
+                            <i class="fa fa-headphones"></i>
+                        </div>
+                        <div class="ci-text">
+                            <h5>Support</h5>
+                            <p>{{ setting.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cs-map">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d735515.5813275519!2d-80.41163541934742!3d43.93644386501528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882a55bbf3de23d7%3A0x3ada5af229b47375!2sMono%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sbd!4v1583262687289!5m2!1sen!2sbd"
+            height="450" style="border:0;" allowfullscreen=""></iframe>
+    </div>
+</section>
+<!-- Contact Section End -->
+{% endblock main_content %}
