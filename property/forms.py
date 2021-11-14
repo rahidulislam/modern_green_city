@@ -44,7 +44,7 @@ class AddLandQueryForm(forms.ModelForm):
                 Column('message', css_class='form-group col-md-12 mb-0'),
                 css_class='form-row'
             ),
-            Submit('submit', 'Search', css_class='search-btn')
+            Submit('submit', 'Submit', css_class='search-btn')
             
         )
     

@@ -58,19 +58,23 @@
     <header class="header-section">
         <div class="hs-top">
             <div class="container">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col-lg-2">
                         <div class="logo">
-                            <a href="./index.html"><img style="width: 70px; height:50px;" src="{{ setting.image_url }}" alt="{{ setting.website_name }}"></a>
+                            <a href="./index.html"><img style="width: 100px; height:80px;" src="{{ setting.image_url }}" alt="{{ setting.website_name }}"></a>
+                            
                         </div>
                     </div>
-                    <div class="col-lg-10">
+                    <div class="col-lg-4">
+                        <h4 class="text-bold">{{ setting.website_name|upper }}</h4>
+                    </div>
+                    <div class="col-lg-6">
                         <div class="ht-widget">
                             <ul>
                                 <li><i class="icon_mail_alt"></i> {{ setting.email }}</li>
                                 <li><i class="fas fa-mobile-alt"></i> {{ setting.mobile }}</li>
                             </ul>
-                            <a href="#" class="hw-btn">Submit property</a>
+                            
                         </div>
                     </div>
                 </div>
