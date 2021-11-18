@@ -34,6 +34,28 @@ class Setting(models.Model):
         return url
 
 
+class Slider(models.Model):
+
+    caption = models.CharField(max_length=50)
+    image = models.ImageField(upload_to='slider/')
+
+    class Meta:
+        verbose_name = "Slider"
+        verbose_name_plural = "Sliders"
+
+    def __str__(self):
+        return self.caption
+
+    def get_absolute_url(self):
+        return reverse("Slider_detail", kwargs={"pk": self.pk})
+
+    def image_url(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
+
 
 class ContactUs(models.Model):
     name = models.CharField(max_length=100)
