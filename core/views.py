@@ -12,7 +12,7 @@ class HomeView(TemplateView, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        land_types = LandType.objects.all().order_by('-id')[:5]
+        land_types = LandType.objects.all().order_by('-id')[:4]
         context["land_types"] = land_types
         context["lands"] = Land.objects.filter(land_type__in = land_types)
         context["hero_sliders"] = Slider.objects.all().order_by('-id')[:5]
